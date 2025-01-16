@@ -5,7 +5,10 @@
     <link rel="icon" type="image/svg+xml" href="/goit-js-hw-11/assets/favicon-qdS2hOlg.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>goit-js-hw-10</title>
-    <link rel="stylesheet" crossorigin href="/goit-js-hw-11/assets/styles-D7AxUTIf.css">
+    <script type="module" crossorigin src="/goit-js-hw-11/index.js"></script>
+    <link rel="modulepreload" crossorigin href="/goit-js-hw-11/assets/vendor-17o45ynk.js">
+    <link rel="stylesheet" crossorigin href="/goit-js-hw-11/assets/vendor-DumFYO8Z.css">
+    <link rel="stylesheet" crossorigin href="/goit-js-hw-11/assets/index-Dv-EL5wq.css">
   </head>
   <body>
     <header class="header">
@@ -16,22 +19,23 @@
               <use href="/goit-js-hw-11/assets/sprite-E8vg0sBb.svg#logo"></use>
             </svg>
           </a>
-          <ul class="nav-list">
-            <li class="nav-item">
-              <a class="nav-link {=$highlight-act}" href="./1-timer.html"
-                >Timer</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link {=$highlight-curr}" href="./2-snackbar.html"
-                >Snackbar</a
-              >
-            </li>
-          </ul>
+          <form class="search-form js-search-form">
+            <input
+              class="search-input js-search-input"
+              type="text"
+              name="user_query"
+              placeholder="Search images"
+              required
+            />
+            <button class="search-btn" type="submit">Search</button>
+          </form>
         </nav>
       </div>
     </header>
     <main>
+      <!-- images List -->
+      <ul class="gallery js-gallery"></ul>
+      <!-- images List -->
       <section class="vite-promo">
         <div class="container">
           <div class="vite-promo-thumb">
