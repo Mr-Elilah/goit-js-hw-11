@@ -56,21 +56,19 @@ export function renderGallery(images) {
   gallery.innerHTML = markup;
 }
 
-// Функция для отображения индикатора загрузки
 export function showLoadingIndicator() {
   const loader = document.querySelector('.loader');
   if (loader) {
-    loader.classList.add('show'); // Добавляем класс для показа лоадера
+    loader.classList.add('show');
   } else {
     console.error('Loader not found!');
   }
 }
 
-// Функция для скрытия индикатора загрузки
 export function hideLoadingIndicator() {
   const loader = document.querySelector('.loader');
   if (loader) {
-    loader.classList.remove('show'); // Убираем класс для скрытия лоадера
+    loader.classList.remove('show');
   } else {
     console.error('Loader not found!');
   }

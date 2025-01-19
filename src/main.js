@@ -10,6 +10,8 @@ import {
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
+import { setPaginationButtons } from './js/custom.js';
+
 const searchForm = document.querySelector('.search-form');
 const searchInput = document.querySelector('.search-input');
 
@@ -47,6 +49,8 @@ function onSearch(event) {
         captionDelay: 250,
       });
       lightbox.refresh();
+
+      setPaginationButtons(query);
     })
     .catch(error => {
       hideLoadingIndicator();
