@@ -1,27 +1,57 @@
-// import iziToast
-import iziToast from 'izitoast';
-import 'izitoast/dist/css/iziToast.min.css';
-
-// import SimpleLightbox
+import { fetchImages } from './js/pixabay-api.js';
+import {
+  renderGallery,
+  showErrorMessage,
+  showSuccessMessage,
+  showLoadingIndicator,
+  hideLoadingIndicator,
+} from './js/render-functions.js';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-// handle Submit
-const searchFormEl = document.querySelector('.js-search-form');
-const onSearchSubmit = event => {
+const searchForm = document.querySelector('.search-form');
+const searchInput = document.querySelector('.search-input');
+
+searchForm.addEventListener('submit', onSearch);
+
+function onSearch(event) {
   event.preventDefault();
 
-  const searchedQuery = event.currentTarget.elements.user_query.value.trim();
-  if (searchedQuery === '') {
-    iziToast.error({
-      title: 'Error',
-      message: 'Enter your request',
-      position: 'topRight',
-    });
+  const query = searchInput.value.trim();
+  if (query === '') {
+    showErrorMessage('Please enter a search query.');
     return;
   }
-};
-searchFormEl.addEventListener('submit', onSearchSubmit);
+
+  input.value = '';
+  localStorage.clear();
+
+  showLoadingIndicator();
+
+  fetchImages(query)
+    .then(images => {
+      hideLoadingIndicator();
+      if (images.length === 0) {
+        showErrorMessage(
+          'Sorry, there are no images matching your search query. Please try again!'
+        );
+        return;
+      }
+
+      renderGallery(images);
+      showSuccessMessage('Images loaded successfully!');
+
+      const lightbox = new SimpleLightbox('.gallery a', {
+        captionsData: 'alt',
+        captionDelay: 250,
+      });
+      lightbox.refresh();
+    })
+    .catch(error => {
+      hideLoadingIndicator();
+      showErrorMessage('Oops, something went wrong. Please try again later.');
+    });
+}
 
 // search-input box-shadow
 const input = document.querySelector('.search-input');
